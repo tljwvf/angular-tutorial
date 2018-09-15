@@ -1,0 +1,39 @@
+<!-- https://angular.io/tutorial/toh-pt1#selector
+  | is a pipe opperator which with the uppercase afterwards activates UppercasePipe 
+  To automate that data flow, setup a two-way data binding between the <input> form element and the hero.name property.
+  [(ngModel)] is Angular's two-way data binding syntax.
+  Here it binds the hero.name property to the HTML textbox so that data can flow in both directions: from the hero.name property to the textbox, and from the textbox back to the hero.name
+-->
+<!--The *ngFor is Angular's repeater directive. It repeats the host element for each element in a list.-->
+<h2>My Heroes</h2>
+ 
+<div>
+  <label>Hero name:
+    <input #heroName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
+</div>
+ 
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{hero.id}}">
+      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </a>
+    <button class="delete" title="delete hero"
+      (click)="delete(hero)">x</button>
+  </li>
+</ul>
+<!--
+  https://angular.io/tutorial/toh-pt3
+
+  [hero]="selectedHero" is an Angular property binding.
+
+  Refactoring the original HeroesComponent into two components yields benefits, both now and in the future:
+  You simplified the HeroesComponent by reducing its responsibilities.
+  You can evolve the HeroDetailComponent into a rich hero editor without touching the parent HeroesComponent.
+  You can evolve the HeroesComponent without touching the hero detail view.
+  You can re-use the HeroDetailComponent in the template of some future component.
+-->
